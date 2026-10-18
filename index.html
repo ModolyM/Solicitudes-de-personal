@@ -81,21 +81,19 @@
     <label for="tipo">Tipo de solicitud</label>
     <select id="tipo" name="tipo" required>
       <option value="">Selecciona una opción</option>
-      <option value="Librar un día">Librar un día completo</option>
-      <option value="Librar un turno">Librar un turno concreto</option>
+      <option value="Librar día completo">Librar un día completo</option>
+      <option value="Descansar un turno">Descansar un turno</option>
     </select>
 
     <label for="fecha">Fecha solicitada</label>
     <input id="fecha" name="fecha" type="date" required>
 
     <div id="turnoBox" hidden>
-      <label for="turno">Turno que deseas librar</label>
+      <label for="turno">Turno que deseas descansar</label>
       <select id="turno" name="turno">
         <option value="">Selecciona el turno</option>
-        <option value="Mañana">Mañana</option>
-        <option value="Tarde">Tarde</option>
-        <option value="Noche">Noche</option>
-        <option value="Otro">Otro</option>
+        <option value="MAÑANA">MAÑANA</option>
+        <option value="TARDE">TARDE</option>
       </select>
     </div>
 
@@ -119,10 +117,13 @@
   const form = document.getElementById('solicitudForm');
 
   tipo.addEventListener('change', () => {
-    const necesitaTurno = tipo.value === 'Librar un turno';
+    const necesitaTurno = tipo.value === 'Descansar un turno';
     turnoBox.hidden = !necesitaTurno;
     turno.required = necesitaTurno;
-    if (!necesitaTurno) turno.value = '';
+
+    if (!necesitaTurno) {
+      turno.value = '';
+    }
   });
 
   form.addEventListener('submit', (event) => {
